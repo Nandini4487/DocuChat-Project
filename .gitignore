@@ -1,0 +1,17 @@
+# Python virtual environment
+venv/
+
+# Byte-compiled / optimized files
+__pycache__/
+*.pyc
+
+# Environment variables & secrets
+.env
+!.env.example
+
+# Runtime data & storage directories
+uploads/
+chroma_db/
+
+# Test caches
+.pytest_cache/

@@ -15,7 +15,7 @@ from backend.rag_service import (
     load_and_chunk_pdf,
 )
 
-FIXTURES_DIR = Path(__file__).resolve().parent.parent.parent / "tests" / "fixtures"
+FIXTURES_DIR = Path(__file__).resolve().parent / "fixtures"
 SAMPLE_PDF_PATH = FIXTURES_DIR / "sample_2page.pdf"
 EMPTY_PDF_PATH = FIXTURES_DIR / "empty_scanned.pdf"
 
@@ -60,6 +60,7 @@ class MockChatLLM:
 # ---------------------------------------------------------------------------
 # Task 3 Tests: PDF Ingestion & Chunking
 # ---------------------------------------------------------------------------
+
 
 def test_load_and_chunk_pdf_success():
     """Test that a 2-page PDF produces valid chunks with correct metadata and sizing."""
@@ -124,6 +125,7 @@ def test_rag_service_instance_chunking():
 # ---------------------------------------------------------------------------
 # Task 4 Tests: Vector Store Ingestion & Chroma Persistence (No Network Calls)
 # ---------------------------------------------------------------------------
+
 
 def test_vector_store_ingest_and_query_by_metadata(tmp_path):
     """Test that ingesting sample PDF adds chunks to Chroma with correct metadata."""
@@ -210,6 +212,7 @@ def test_vector_store_duplicate_detection(tmp_path):
 # Task 5 Tests: Retrieval & Grounded Answer Generation (No Network Calls)
 # ---------------------------------------------------------------------------
 
+
 def test_answer_question_with_mocked_context(tmp_path):
     """Test that retrieved context chunks produce answer with correct deduplicated sources."""
     persist_dir = str(tmp_path / "chroma_qa_db")
@@ -272,7 +275,7 @@ def test_answer_question_real_integration(tmp_path):
     """Live integration test using Google Gemini API and real embeddings/LLM.
 
     Run separately using:
-        pytest backend/tests/test_rag_service.py -m integration -v -s
+        pytest tests/test_rag_service.py -m integration -v -s
     """
     settings = get_settings()
     api_key = settings.GOOGLE_API_KEY.get_secret_value()
